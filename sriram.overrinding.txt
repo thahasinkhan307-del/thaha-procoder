@@ -1,0 +1,17 @@
+class vehicle:
+    def describe(self):
+           print('this is a eneric vehicle.')
+class car(vehicle):
+    def describe(self):
+           print('this is a sporty car.')
+class motorcycle(vehicle):
+        def describe(self):
+                 print('this is a fast motorcycle.')
+
+vehicle = vehicle()
+car=car()
+motorcycle=motorcycle()
+
+vehicle.describe()
+car.describe()
+motorcycle.describe()
