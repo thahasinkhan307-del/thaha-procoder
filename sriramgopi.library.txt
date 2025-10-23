@@ -1,0 +1,87 @@
+class Library:
+    def __init__(self):
+        self.books = []  # List to store books
+        self.borrowed_books = {}  # Dictionary to track borrowed books
+
+    def display_books(self):
+        if not self.books:
+            print("No books available in the library.")
+        else:
+            print("Books available in the library:")
+            for book in self.books:
+                print(f"- {book}")
+
+    def add_book(self, book_name):
+        self.books.append(book_name)
+        print(f"'{book_name}' has been added to the library.")
+
+    def remove_book(self, book_name):
+        if book_name in self.books:
+            self.books.remove(book_name)
+            print(f"'{book_name}' has been removed from the library.")
+        else:
+            print(f"'{book_name}' is not available in the library.")
+
+    def search_book(self, book_name):
+        if book_name in self.books:
+            print(f"'{book_name}' is available in the library.")
+        else:
+            print(f"'{book_name}' is not available in the library.")
+
+    def borrow_book(self, book_name, user_name):
+        if book_name in self.books:
+            self.books.remove(book_name)
+            self.borrowed_books[book_name] = user_name
+            print(f"'{book_name}' has been borrowed by {user_name}.")
+        elif book_name in self.borrowed_books:
+            print(f"'{book_name}' is already borrowed by {self.borrowed_books[book_name]}.")
+        else:
+            print(f"'{book_name}' is not available in the library.")
+
+    def return_book(self, book_name):
+        if book_name in self.borrowed_books:
+            self.books.append(book_name)
+            user_name = self.borrowed_books.pop(book_name)
+            print(f"'{book_name}' has been returned by {user_name}.")
+        else:
+            print(f"'{book_name}' was not borrowed from the library.")
+
+def main():
+    library = Library()
+    while True:
+        print("\n=======Library=======")
+        print("1 -> Display all books")
+        print("2 -> Add a book")
+        print("3 -> Remove a book")
+        print("4 -> Search a book")
+        print("5 -> Borrow a book")
+        print("6 -> Return a book")
+        print("7 -> Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            library.display_books()
+        elif choice == '2':
+            book_name = input("Enter the name of the book to add: ")
+            library.add_book(book_name)
+        elif choice == '3':
+            book_name = input("Enter the name of the book to remove: ")
+            library.remove_book(book_name)
+        elif choice == '4':
+            book_name = input("Enter the name of the book to search: ")
+            library.search_book(book_name)
+        elif choice == '5':
+            book_name = input("Enter the name of the book to borrow: ")
+            user_name = input("Enter your name: ")
+            library.borrow_book(book_name, user_name)
+        elif choice == '6':
+            book_name = input("Enter the name of the book to return: ")
+            library.return_book(book_name)
+        elif choice == '7':
+            print("Exiting the library system. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
